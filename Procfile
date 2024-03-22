@@ -1,1 +1,1 @@
-web:gunicorn HBG.wsgi --log-file -
+web: gunicorn HBG.wsgi --log-file -
