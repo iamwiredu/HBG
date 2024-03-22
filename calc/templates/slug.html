@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+body{
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #bed6c5;
+    }
+#form{
+
+    width: 470px;
+    height: 400px;
+    margin:0;
+    position: absolute;
+    top: 55%;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%,-50%);
+    border: 2px soild grey;
+    border-radius: 10px;
+    background-color:white;
+    padding: 10px;
+}
+tbody tr td{
+    padding-bottom: 10px;
+    
+}
+tbody{
+    margin: 10px;
+}
+input[type=submit]{
+    background-color: #bed6c5;
+    border: none;
+    padding: 4px;
+    border-radius: 5px;
+
+    
+}
+input[type=number]{
+    padding-right: 3px;
+}
+</style>
+<body>
+    <h1 style="text-align: center; ">Slug Flow Regime</h1>
+   <div id="form">
+    <form method="POST" action="" >
+        {% csrf_token %}
+        
+        <table>
+            <thead>
+                <th>
+                    <td></td>
+                    <td></td>
+
+                </th>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><label for="Pl">Pl Density of the liquid]</label></td>
+                    <td><input type="number" name="Pl" step="any" required><span>lbm/ft3</span></td>
+                </tr>
+                <tr>
+                    <td><label for="Pl">Pg Density of the Gas]</label></td>
+                    <td><input type="number" name="Pg" step="any" required>lbm/ft3</td>
+                </tr>
+                <tr>
+                    <td><label for="Ul" >Ul [Visocity of the liquid]</label></td>
+                    <td><input type="number" name="Ul" step="any" required>cpi</td>
+                </tr>
+                <tr>
+                    <td><label for="Ug" >Ug [Visocity of the Gas]</label></td>
+                    <td><input type="number" name="Ug" step="any" required>cpi</td>
+                </tr>
+                <tr>
+                    <td><label for="IFT" >IFT [Interfacial Tension]</label></td>
+                    <td><input type="number" name="IFT_value" step="any" required>dyne/cm</td>
+                </tr>
+                <tr>
+                    <td><label for="P" >P [Current Reservoir Pressure]</label></td>
+                    <td><input type="number" name="P" step="any" required>psi</td>
+                </tr>
+                <tr>
+                    <td><label for="e">e [Relative Roughness]</label></td>
+                    <td><input type="number" name="e" step="any" required>psi</td>
+                </tr>
+                <tr>
+                    <td><label for="dl">dl [Length of Pipe]</label></td>
+                    <td><input type="number" name="dl" step="any" required>ft</td>
+                </tr>
+            </tbody>
+        </table>
+        <input type="submit" value="calculate" name="slugflowcalc">
+
+    </form>
+    <form action="" method="post">
+        {% csrf_token %}
+       <input type="submit" name="recalculate" value="recalculate" style="margin-top: 10px;">
+    </form>
+    <div>
+        <p>Using unrealistic values results in a math domain error.</p>
+       </div>
+        <!-- <div style="margin-top: 90px; padding-left: 60px;">
+            <table>
+                <thead>
+                    <th>Dataset</th>
+                    <th>value</th>
+                    <th>units</th>
+                </thead>
+                <tbody>
+                 {% for key,value in ABdataset.items %}
+                 <tr style="text-align: center;">
+                    <td>{{key}}</td>
+                    <td>{{value}}</td>
+                    <td></td>
+                 </tr>
+                 {% endfor%}
+                </tbody>
+            </table>
+        </div> -->
+
+
+   </div>
+</body>
+</html>

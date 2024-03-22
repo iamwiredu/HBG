@@ -22,7 +22,7 @@ def regime(Vm: float, Vsg: float, D: float):
     if (A > B):
         '''The regime is the bubble regime and we use the grifth method'''
         return 'bubble'
-    elif ( B > A ) or ( (B-A) == 0 ):
+    elif ( B > A ):
         '''The regime is the slug regime and we use the Hagedorn Brown method'''
         return 'slug'        
     

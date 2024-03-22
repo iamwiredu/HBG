@@ -5,6 +5,7 @@ def Nl(Ul: float, Pl: float , Ift: float) -> float:
     '''NL: Liquid viscosity number'''
     '''Ift: interfacial tension units: dyne/cm'''
     Nl_value = 0.15726 * Ul * ( 1 / (Pl * Ift**3 ) )**(1/4)
+    return Nl_value
 
 
 def CNL(Nl):
@@ -18,7 +19,7 @@ def CNL(Nl):
 
     return CNL_value
 
-def phi(Vsl,Pl,IFT,Vsg,D,P):
+def phi(Vsl,Pl,IFT,Vsg,D,P,CNL):
     Nvl = 1.938 * Vsl * (Pl/IFT)**(1/4)
 
     Nvg =  1.938 * Vsg * (Pl/IFT)**(1/4)
@@ -33,7 +34,17 @@ def YlPsi(phi):
 
     return YlPsi_value
 
-def Yl(phi,YlPsi):
+def comPhi(Ul,Pl,IFT,Vsg,D):
+    Nl_value = 0.15726 * Ul * ( 1 / (Pl * IFT**3 ) )**(1/4)
+
+    Nvg =  1.938 * Vsg * (Pl/IFT)**(1/4)
+
+    Nd = 120.827 * D * math.sqrt(Pl/IFT)
+
+    comPhi_value = (Nvg * Nl_value**0.3) / (Nd**2.14)
+    return comPhi_value
+
+def Yl_HB(phi,YlPsi):
     if phi <= 0.01:
         Psi = 1
         Yl = YlPsi
@@ -45,8 +56,13 @@ def Yl(phi,YlPsi):
         return Yl
     
 
-def Mt(Ml,Mg):
-    return Ml + Mg
+def Mt(Ql,Pl,Qg,Pg):
+    return Ql*Pl + Qg*Pg
+
+def Re_HB(Mt,Ul,Ug,D,Yl):
+    Re_value = (2.2 * 10**(-2) * Mt) / (D * Ul**Yl * Ug**(1-Yl))
+    return Re_value
+
 
 def dP_HB(Pave,ff,Mt,D,dz):
     dP_value = ( Pave + ( (ff * Mt**2 ) / ( 7.413 * 10**10 * D**5 * Pave) ) ) * (dz/144)

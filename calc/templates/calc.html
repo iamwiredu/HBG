@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #bed6c5;
+    }
+#form{
+
+    width: 400px;
+    height: 400px;
+    margin:0;
+    position: absolute;
+    top: 55%;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%,-50%);
+    border: 2px soild grey;
+    border-radius: 10px;
+    background-color:white;
+    padding: 10px;
+}
+tbody tr td{
+    padding-bottom: 10px;
+    
+}
+tbody{
+    margin: 10px;
+}
+input[type=submit]{
+    background-color: #bed6c5;
+    border: none;
+    padding: 4px;
+    border-radius: 5px;
+
+}
+    </style>
+</head>
+<body>
+    <h1 style="text-align: center;">Hagedorn-Brown Grith Correlation</h1>
+    <div id="form">
+        <form method="post" action="" id="ABdataset">
+            {% csrf_token %}
+            <table>
+                <thead>
+                    <th></th>
+                    <th></th>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><label for="Qw">Qw [Water Flow Rate]</label></td>
+                        <td><input name="Qw" type="number" step="any" required>bbl/day</td>
+                    </tr>
+                    <tr>
+                        <td><label for="Qo">Oil [Oil Flow Rate]</label></td>
+                        <td><input name="Qo" type="number" step="any" required>stb/day</td>
+                    </tr>
+                    <tr>
+                        <td><label for="Qg">Qg [Gas Flow Rate]</label></td>
+                        <td><input name="Qg" type="number" step="any" required>scf/day</td>
+                    </tr>
+                    <tr>
+                        <td><label for="D">D [Tube inner Diameter]</label></td>
+                        <td><input name="D" type="number" step="any" required>in.</td>
+                    </tr>
+                </tbody>
+            </table>
+            <input type="submit" value="determineFlowRegime" name="ABdatasetSubmission">
+            
+        </form>
+
+    </div>
+</body>
+</html>

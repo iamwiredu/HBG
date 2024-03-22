@@ -2,7 +2,7 @@ import math
 def Yl(Vm,Vsg):
     ''' Vm : Liiquid Mixture Velocity ''' 
     Vs = 0.8 # units ft/s
-    Yl_value = 1 - [ 1 + (Vm/Vs) - math.sqrt( (1 + Vm/Vs )**2 - 4 * ( Vsg/Vs ) ) ]
+    Yl_value = 1 - 1/2 * ( 1 +  (Vm/Vs) - math.sqrt( (1 + Vm/Vs )**2 - 4 * ( Vsg/Vs ) ) )
     return Yl_value
 
 def Re(Ml,D,Ul):

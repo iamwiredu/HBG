@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #bed6c5;
+    }
+#form{
+
+    width: 440px;
+    height: 400px;
+    margin:0;
+    position: absolute;
+    top: 55%;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%,-50%);
+    border: 2px soild grey;
+    border-radius: 10px;
+    background-color:white;
+    padding: 10px;
+}
+tbody tr td{
+    padding-bottom: 10px;
+    
+}
+tbody{
+    margin: 10px;
+}
+input[type=submit]{
+    background-color: #bed6c5;
+    border: none;
+    padding: 4px;
+    border-radius: 5px;
+
+}
+    </style>
+</head>
+<body>
+    <h1 style="text-align: center;">Bubble Regime - Grith Method</h1>
+    <div id="form">
+        <form action="" method="post">
+            {% csrf_token %}
+            <table>
+                <thead>
+                    <th></th>
+                    <th></th>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><label for="Pw">Pw [Density of the Water]</label></td>
+                        <td><input type="number" name="Pw" step="any" required>lbm/ft3</td>
+                    </tr>
+                    <tr>
+                        <td><label for="Ul" >Ul [Visocity of the liquid]</label></td>
+                        <td><input type="number" name="Ul" step="any" required>cpi</td>
+                    </tr>
+                    <tr>
+                        <td><label for="Pl">Pl [Density of the liquid]</label></td>
+                        <td><input type="number" name="Pl" step="any" required>cpi</td>
+                    </tr>
+                    <tr>
+                        <td><label for="Pg">Pg [Density of the Gas]</label></td>
+                        <td><input type="number" name="Pg" step="any" required>cpi</td>
+                    </tr>
+                    <tr>
+                        <td><label for="e">e [Relative Roughness]</label></td>
+                        <td><input type="number" name="e" step="any" required></td>
+    
+                    </tr>
+                    <tr>
+                        <td><label for="dl">dl [Length of Pipe]</label></td>
+                        <td><input type="number" name="dl" step="any" required>ft</td>
+                    </tr>
+                </tbody>
+            </table>
+            <input type="submit" name="bubbleflowcalc"/>
+           
+        </form>
+       <form method="post" action="">
+        {% csrf_token %}
+        <input type="submit" name="recalculate" value="recalculate" style="margin-top: 10px;">
+       </form>
+       <div>
+        <p>Using unrealistic values results in a math domain error.</p>
+       </div>
+    </div>
+</body>
+
+</html>
