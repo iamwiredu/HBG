@@ -13,7 +13,7 @@ body{
 #form{
 
     width: 470px;
-    height: 400px;
+    height: 430px;
     margin:0;
     position: absolute;
     top: 55%;
@@ -48,7 +48,7 @@ input[type=number]{
 <body>
     <h1 style="text-align: center; ">Slug Flow Regime</h1>
    <div id="form">
-    <form method="POST" action="" >
+    <form method="POST" action="" style="margin-left: 24px;">
         {% csrf_token %}
         
         <table>
@@ -97,12 +97,13 @@ input[type=number]{
         <input type="submit" value="calculate" name="slugflowcalc">
 
     </form>
-    <form action="" method="post">
+    <form action="" method="post" style="margin-left: 24px;">
         {% csrf_token %}
-       <input type="submit" name="recalculate" value="recalculate" style="margin-top: 10px;">
+       <input type="submit" name="recalculate" value="recalculate" style="margin-top: 10px;" >
     </form>
-    <div>
-        <p>Using unrealistic values results in a math domain error.</p>
+    <div style="text-align: center;">
+        <p>Use Valid Data Only</p>
+        <p>Invalid Data = ERRORS</p>
        </div>
         <!-- <div style="margin-top: 90px; padding-left: 60px;">
             <table>
