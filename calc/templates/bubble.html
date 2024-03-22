@@ -43,7 +43,7 @@ input[type=submit]{
 <body>
     <h1 style="text-align: center;">Bubble Regime - Grith Method</h1>
     <div id="form">
-        <form action="" method="post">
+        <form action="" method="post" style="margin-left: 24px;">
             {% csrf_token %}
             <table>
                 <thead>
@@ -81,7 +81,7 @@ input[type=submit]{
             <input type="submit" name="bubbleflowcalc"/>
            
         </form>
-       <form method="post" action="">
+       <form method="post" action="" style="margin-left: 24px;">
         {% csrf_token %}
         <input type="submit" name="recalculate" value="recalculate" style="margin-top: 10px;">
        </form>
