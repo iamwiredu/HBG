@@ -8,19 +8,17 @@ from .HB import *
 
 def calc(request):
     if 'ABdatasetSubmission' in request.POST:
-        Qw = float(request.POST.get('Qw'))
         Qo = float(request.POST.get('Qo'))
         Qg =  float(request.POST.get('Qg'))
         D =  float(request.POST.get('D'))
         
         Vsg_value = Vsg(Qg,D)
-        Vsl_value = Vsl(Qo,Qw,D) 
+        Vsl_value = Vsl(Qo,D) 
 
         Vm_value = Vsl_value +  Vsg_value
         regime_value = regime(Vm_value,Vsl_value,D)
 
         request.session['ABdataset'] = {
-            'Qw':Qw,
             'Qo':Qo,
             'Qg':Qg,
             'D':D,
@@ -41,12 +39,11 @@ def bubble(request):
         ABdataset = request.session['ABdataset']
 
         if 'bubbleflowcalc' in request.POST:
-            Pw = float(request.POST.get('Pw'))
             
             Ul = float(request.POST.get('Ul'))
             Pl = float(request.POST.get('Pl'))
             Pg = float(request.POST.get('Pg'))
-            Ml = ABdataset['Qo']*(Pl-Pw) + ABdataset['Qw']*Pw
+            Ml = ABdataset['Qo']*(Pl) 
             e = float(request.POST.get('e'))
             dl = float(request.POST.get('dl'))
 
@@ -57,7 +54,7 @@ def bubble(request):
 
 
             dP_value = dP_grifth(P_ave_value,ff_value,Ml,ABdataset['D'],Pl,Yl_value,dl)
-            request.session['dP_value'] = dP_value
+            request.session['dP_value'] = abs(dP_value)
             return redirect(results)
         
         if 'recalculate' in request.POST:
@@ -123,11 +120,11 @@ def slug(request):
             YlPsi_value = YlPsi(phi_value)
             Yl_HB_value =Yl_HB(comPhi_value,YlPsi_value)
             P_ave_value = P_ave(Yl_HB_value,Pl,Pg)
-            Mt_value = Mt(ABdataset['Qo']+ABdataset['Qw'],Pl,ABdataset['Qg'],Pg)
+            Mt_value = Mt(ABdataset['Qo'],Pl,ABdataset['Qg'],Pg)
             Re_value = Re_HB(Mt_value,Ul,Ug,ABdataset['D'],Yl_HB_value)
             ff_value = ff(e,Re_value)
             dP_HB_value = dP_HB(P_ave_value,ff_value,Mt_value,ABdataset['D'],dl)
-            request.session['dP_value'] = dP_HB_value
+            request.session['dP_value'] = abs(dP_HB_value)
             print(comPhi_value)
             return redirect(results)
         context={

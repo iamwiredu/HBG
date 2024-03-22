@@ -7,8 +7,8 @@ def P_ave(Yl,Pl,Pg):
 def ff(e,Re):
     ffValue = ( 1 / (-4 * math.log( e/3.7065 - (5.0452/Re) * math.log( ( (e**1.1098)/2.8257 ) + (7.149/Re)**0.8981 )  ) ) )**2
     return ffValue
-def Vsl(Qo,Qw,D):
-    Vsl_value = (Qo+Qw) / (math.pi/4 * D**2)
+def Vsl(Qo,D):
+    Vsl_value = (Qo) / (math.pi/4 * D**2)
     return Vsl_value
 
 def Vsg(Qg,D):
