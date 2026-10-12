@@ -16,7 +16,7 @@ def calc(request):
         Vsl_value = Vsl(Qo,D) 
 
         Vm_value = Vsl_value +  Vsg_value
-        regime_value = regime(Vm_value,Vsl_value,D)
+        regime_value = regime(Vm_value,Vsg_value,D)
 
         request.session['ABdataset'] = {
             'Qo':Qo,
@@ -43,7 +43,7 @@ def bubble(request):
             Ul = float(request.POST.get('Ul'))
             Pl = float(request.POST.get('Pl'))
             Pg = float(request.POST.get('Pg'))
-            Ml = ABdataset['Qo']*(Pl) 
+            Ml = ABdataset['Qo'] * Pl * 86400  # lbm/day, as the Re and dP constants expect
             e = float(request.POST.get('e'))
             dl = float(request.POST.get('dl'))
 
@@ -102,7 +102,6 @@ def slug(request):
     try:
         ABdataset = request.session['ABdataset']
 
-        print(ABdataset)
         if 'slugflowcalc' in request.POST:
             Pl = float(request.POST.get('Pl'))
             Pg = float(request.POST.get('Pg'))
@@ -120,12 +119,11 @@ def slug(request):
             YlPsi_value = YlPsi(phi_value)
             Yl_HB_value =Yl_HB(comPhi_value,YlPsi_value)
             P_ave_value = P_ave(Yl_HB_value,Pl,Pg)
-            Mt_value = Mt(ABdataset['Qo'],Pl,ABdataset['Qg'],Pg)
+            Mt_value = Mt(ABdataset['Qo'],Pl,ABdataset['Qg'],Pg) * 86400  # lbm/day
             Re_value = Re_HB(Mt_value,Ul,Ug,ABdataset['D'],Yl_HB_value)
             ff_value = ff(e,Re_value)
             dP_HB_value = dP_HB(P_ave_value,ff_value,Mt_value,ABdataset['D'],dl)
             request.session['dP_value'] = abs(dP_HB_value)
-            print(comPhi_value)
             return redirect(results)
         context={
             'ABdataset':ABdataset,

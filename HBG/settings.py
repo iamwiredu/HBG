@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
+import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -20,13 +21,16 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-3saygep+!4ah7g50ucgfg@c=l7ks8wtm4@k2__pxd@ao1&+s6l'
+SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'dev-only-insecure-key')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.environ.get('DJANGO_DEBUG') == '1'
 
-ALLOWED_HOSTS = ['*']
-CSRF_TRUSTED_ORIGINS = ['https://hbg-production.up.railway.app']
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost', '.vercel.app']
+CSRF_TRUSTED_ORIGINS = ['https://*.vercel.app']
+
+# Store the session in a signed cookie so the app needs no database when deployed.
+SESSION_ENGINE = 'django.contrib.sessions.backends.signed_cookies'
 
 
 # Application definition

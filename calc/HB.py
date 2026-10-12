@@ -11,7 +11,7 @@ def Nl(Ul: float, Pl: float , Ift: float) -> float:
 def CNL(Nl):
     '''CNl: Coefficient of liquid viscosity number'''
 
-    X1 = math.log(Nl) + 3
+    X1 = math.log10(Nl) + 3
 
     Y = -2.69851 + 0.15841 * X1 - 0.55100 * X1**2 + 0.54785 * X1**3 - 0.12195 * X1**4
 
@@ -30,7 +30,8 @@ def phi(Vsl,Pl,IFT,Vsg,D,P,CNL):
     return phi_value
 
 def YlPsi(phi):
-    YlPsi_value = -0.10307 + 0.6177 * (math.log(phi) + 6)**3 - 0.0401 * (math.log(phi)+6)**4
+    X = math.log10(phi) + 6
+    YlPsi_value = -0.10307 + 0.61777 * X - 0.63295 * X**2 + 0.29598 * X**3 - 0.0401 * X**4
 
     return YlPsi_value
 
